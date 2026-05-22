@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Hamza Moussa – Portfolio BUT GEII</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f8fafc;--fg:#0f172a;--muted:#64748b;--border:#e2e8f0;
+  --primary:#0369a1;--pl:#e0f2fe;--sec:#1e293b;--card:#fff;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--fg);line-height:1.6}
+a{color:inherit;text-decoration:none}button{cursor:pointer;font-family:inherit}img{display:block;max-width:100%}
+#edit-banner{display:none;position:fixed;top:0;left:0;right:0;z-index:200;background:#fbbf24;color:#78350f;font-size:.875rem;font-weight:600;padding:.45rem 1.5rem;align-items:center;justify-content:space-between}
+#edit-banner.on{display:flex}
+#edit-banner button{background:rgba(0,0,0,.15);border:none;border-radius:.4rem;padding:.25rem .75rem;font-weight:600;color:#78350f;font-size:.8rem}
+#navbar{position:fixed;left:0;right:0;top:0;z-index:100;background:rgba(248,250,252,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);transition:top .25s}
+.nav-inner{max-width:64rem;margin:0 auto;padding:0 1.5rem;height:4rem;display:flex;align-items:center;justify-content:space-between}
+.nav-brand{font-weight:800;font-size:1.1rem;display:flex;align-items:center;gap:.5rem}
+.nav-brand svg{color:var(--primary)}
+.nav-links{display:flex;gap:1.5rem}
+.nav-links a{font-size:.875rem;font-weight:500;color:var(--muted);transition:color .2s}
+.nav-links a:hover,.nav-links a.active{color:var(--primary)}
+.btn-cv{background:transparent;border:1.5px solid var(--border);border-radius:.5rem;padding:.35rem 1rem;font-size:.875rem;font-weight:600;display:flex;align-items:center;gap:.4rem;color:var(--fg);transition:all .2s}
+.btn-cv:hover{border-color:var(--primary);color:var(--primary)}
+.wrap{max-width:64rem;margin:0 auto;padding:5rem 1.5rem}
+#hero.wrap{padding-top:8rem;padding-bottom:6rem}
+.hero-inner{display:flex;flex-direction:column-reverse;align-items:center;gap:3rem}
+@media(min-width:768px){.hero-inner{flex-direction:row}}
+.hero-text{flex:1;text-align:center}
+@media(min-width:768px){.hero-text{text-align:left}}
+.badge{display:inline-flex;align-items:center;gap:.5rem;padding:.3rem .9rem;border-radius:9999px;background:var(--pl);color:var(--primary);font-size:.75rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;margin-bottom:1.5rem}
+h1.hname{font-size:clamp(2rem,6vw,3.75rem);font-weight:900;letter-spacing:-.05em;line-height:1.1;margin-bottom:1rem}
+.hsub{font-size:clamp(1rem,2.5vw,1.35rem);color:var(--muted);font-weight:500;margin-bottom:1.5rem;line-height:1.5}
+.hsub strong{color:var(--fg)}
+.hmeta{display:flex;flex-wrap:wrap;justify-content:center;gap:1rem;font-size:.875rem;color:var(--muted);margin-bottom:2rem}
+@media(min-width:768px){.hmeta{justify-content:flex-start}}
+.hmeta span{display:flex;align-items:center;gap:.4rem}
+.hbtns{display:flex;flex-wrap:wrap;justify-content:center;gap:1rem}
+@media(min-width:768px){.hbtns{justify-content:flex-start}}
+.btn-p{background:var(--primary);color:#fff;border:none;border-radius:.6rem;padding:.75rem 1.5rem;font-size:1rem;font-weight:600;display:flex;align-items:center;gap:.5rem;transition:opacity .2s,transform .15s}
+.btn-p:hover{opacity:.9;transform:translateY(-1px)}
+.btn-s{background:var(--sec);color:#fff;border:none;border-radius:.6rem;padding:.75rem 1.5rem;font-size:1rem;font-weight:600;transition:opacity .2s,transform .15s}
+.btn-s:hover{opacity:.85;transform:translateY(-1px)}
+.photo-w{position:relative;width:14rem;height:14rem;flex-shrink:0}
+@media(min-width:768px){.photo-w{width:16rem;height:16rem}}
+.glow{position:absolute;inset:0;border-radius:50%;background:rgba(3,105,161,.25);filter:blur(2rem);animation:pulse 3s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.6}50%{opacity:1}}
+.photo-w img{position:relative;width:100%;height:100%;border-radius:50%;border:4px solid #fff;box-shadow:0 8px 32px rgba(0,0,0,.15);object-fit:cover}
+.sec-alt{background:#f1f5f9}
+.sec-dark{background:var(--sec);color:#f1f5f9}
+.sec-hd{display:flex;align-items:center;gap:.75rem;margin-bottom:2.5rem}
+.sec-ic{width:2.5rem;height:2.5rem;border-radius:.6rem;background:var(--pl);display:flex;align-items:center;justify-content:center;color:var(--primary);flex-shrink:0}
+.sec-dark .sec-ic{background:rgba(255,255,255,.1);color:#7dd3fc}
+h2.sec-t{font-size:1.5rem;font-weight:800}
+.pro-p{font-size:1.1rem;color:#475569;line-height:1.8;max-width:44rem}
+.tl{display:flex;flex-direction:column;gap:2rem}
+.tl-i{position:relative;padding-left:2rem;border-left:2px solid var(--border)}
+.tl-d{position:absolute;left:-.55rem;top:.2rem;width:1rem;height:1rem;border-radius:50%;background:var(--primary);border:3px solid var(--bg)}
+.tl-d.dm{background:var(--muted)}
+.tl-dt{font-size:.8rem;font-weight:700;color:var(--primary);margin-bottom:.25rem}
+.tl-dt.dm{color:var(--muted)}
+.tl-ti{font-size:1.15rem;font-weight:800;margin-bottom:.2rem}
+.tl-sb{color:var(--muted);margin-bottom:.9rem;font-size:.93rem}
+.g2{display:grid;grid-template-columns:1fr;gap:.6rem}
+@media(min-width:640px){.g2{grid-template-columns:1fr 1fr}}
+.tag{display:flex;align-items:flex-start;gap:.5rem;background:rgba(0,0,0,.04);border-radius:.5rem;padding:.45rem .7rem;font-size:.83rem;color:var(--muted)}
+.tag-ic{color:var(--primary);flex-shrink:0;margin-top:1px}
+.sec-dark .tl-i{border-color:rgba(255,255,255,.15)}
+.sec-dark .tl-d{border-color:var(--sec)}
+.sec-dark .tl-dt{color:#7dd3fc}
+.exp-c{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:1.25rem;padding:2rem}
+.exp-hd{display:flex;flex-direction:column;gap:1rem;margin-bottom:1.5rem}
+@media(min-width:640px){.exp-hd{flex-direction:row;justify-content:space-between;align-items:flex-start}}
+.exp-r{font-size:1.15rem;font-weight:800;color:#7dd3fc;margin-bottom:.2rem}
+.exp-co{color:#94a3b8;font-weight:500}
+.exp-b{display:inline-flex;align-items:center;gap:.4rem;padding:.3rem .9rem;border-radius:9999px;background:rgba(255,255,255,.1);font-size:.8rem;font-weight:600;white-space:nowrap}
+.exp-l{list-style:none;display:flex;flex-direction:column;gap:.7rem;color:#cbd5e1}
+.exp-l li{display:flex;align-items:flex-start;gap:.5rem}
+.exp-l li svg{color:var(--primary);flex-shrink:0;margin-top:2px}
+.pg{display:grid;grid-template-columns:1fr;gap:1.5rem}
+@media(min-width:640px){.pg{grid-template-columns:1fr 1fr}}
+.pc{background:var(--card);border:1px solid var(--border);border-radius:1.25rem;padding:1.5rem;box-shadow:0 1px 3px rgba(0,0,0,.06);transition:box-shadow .2s}
+.pc:hover{box-shadow:0 4px 16px rgba(0,0,0,.1)}
+.pci{width:3rem;height:3rem;border-radius:50%;background:var(--pl);display:flex;align-items:center;justify-content:center;margin-bottom:1rem;color:var(--primary)}
+.pt{font-size:1.05rem;font-weight:800;margin-bottom:.2rem}
+.ps{font-size:.83rem;color:var(--primary);font-weight:600;margin-bottom:.9rem}
+.pl{list-style:none;display:flex;flex-direction:column;gap:.45rem;font-size:.87rem;color:var(--muted)}
+.pl li{display:flex;align-items:flex-start;gap:.45rem}
+.pl li::before{content:'';width:.38rem;height:.38rem;border-radius:50%;background:var(--primary);flex-shrink:0;margin-top:.45rem}
+.sg{display:grid;grid-template-columns:1fr;gap:1.5rem}
+@media(min-width:640px){.sg{grid-template-columns:1fr 1fr}}
+@media(min-width:900px){.sg{grid-template-columns:1fr 1fr 1fr}}
+.sc{background:var(--card);border:1px solid var(--border);border-radius:1.25rem;padding:1.25rem;box-shadow:0 1px 3px rgba(0,0,0,.06);transition:box-shadow .2s}
+.sc:hover{box-shadow:0 4px 16px rgba(0,0,0,.1)}
+.sl{display:inline-flex;align-items:center;gap:.4rem;padding:.35rem .75rem;border-radius:.5rem;font-size:.8rem;font-weight:700;border:1px solid;margin-bottom:.75rem}
+.cb{background:#eff6ff;color:#1d4ed8;border-color:#bfdbfe}
+.cg{background:#f0fdf4;color:#15803d;border-color:#bbf7d0}
+.cp{background:#faf5ff;color:#7e22ce;border-color:#e9d5ff}
+.co{background:#fff7ed;color:#c2410c;border-color:#fed7aa}
+.cs{background:#f8fafc;color:#475569;border-color:#cbd5e1}
+.cr{background:#fff1f2;color:#be123c;border-color:#fecdd3}
+.si{list-style:none;display:flex;flex-direction:column;gap:.45rem}
+.si li{display:flex;align-items:flex-start;gap:.45rem;font-size:.875rem;color:var(--muted)}
+.sd{width:.45rem;height:.45rem;border-radius:50%;flex-shrink:0;margin-top:.45rem}
+.db{background:#3b82f6}.dg{background:#22c55e}.dp{background:#a855f7}.do{background:#f97316}.ds{background:#64748b}.dr{background:#f43f5e}
+.ig{display:grid;grid-template-columns:1fr;gap:2rem}
+@media(min-width:640px){.ig{grid-template-columns:1fr 1fr 1fr}}
+.ib h3{font-size:1.05rem;font-weight:800;border-bottom:1px solid var(--border);padding-bottom:.5rem;margin-bottom:1rem}
+.cl{list-style:none;display:flex;flex-direction:column;gap:.9rem;color:var(--muted)}
+.cl li{display:flex;align-items:center;gap:.7rem}
+.cl a:hover{color:var(--primary)}
+.isub{font-size:.73rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:.9rem 0 .4rem}
+.il{list-style:none;display:flex;flex-direction:column;gap:.22rem;font-size:.88rem}
+.intl{list-style:none;display:flex;flex-direction:column;gap:.55rem;font-size:.87rem;color:var(--muted)}
+.intl li{display:flex;align-items:flex-start;gap:.45rem}
+footer{background:var(--sec);color:#94a3b8;text-align:center;padding:2rem 1.5rem;font-size:.875rem}
+#float-edit{position:fixed;bottom:1.5rem;right:1.5rem;z-index:150;width:2.75rem;height:2.75rem;border-radius:50%;background:rgba(15,23,42,.07);border:1px solid var(--border);color:var(--muted);display:flex;align-items:center;justify-content:center;transition:all .2s;box-shadow:0 2px 8px rgba(0,0,0,.07)}
+#float-edit:hover{background:var(--sec);color:#fff;transform:scale(1.1)}
+#pin-ov{display:none;position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.6);align-items:center;justify-content:center;padding:1rem}
+#pin-ov.on{display:flex}
+#pin-modal{background:#fff;border-radius:1.25rem;padding:2rem;width:100%;max-width:22rem;box-shadow:0 20px 60px rgba(0,0,0,.25);text-align:center;position:relative}
+.mic{width:3.5rem;height:3.5rem;border-radius:50%;background:var(--pl);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;color:var(--primary)}
+#pin-modal h3{font-size:1.2rem;font-weight:800;margin-bottom:.25rem}
+#pin-modal p{font-size:.875rem;color:var(--muted);margin-bottom:1.5rem}
+#pin-inp{width:100%;text-align:center;font-size:1.75rem;letter-spacing:.5em;border:1.5px solid var(--border);border-radius:.75rem;padding:.7rem;outline:none;font-family:inherit;transition:border-color .2s;margin-bottom:.9rem}
+#pin-inp:focus{border-color:var(--primary)}
+#pin-inp.err{border-color:#ef4444;animation:shake .3s ease}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+#pin-er{color:#ef4444;font-size:.8rem;margin-bottom:.75rem;min-height:1rem}
+#pin-ok{width:100%;background:var(--primary);color:#fff;border:none;border-radius:.6rem;padding:.7rem;font-size:1rem;font-weight:600;transition:opacity .2s}
+#pin-ok:hover{opacity:.9}
+#pin-x{position:absolute;top:.9rem;right:.9rem;background:none;border:none;color:var(--muted);font-size:1.2rem;line-height:1;cursor:pointer}
+body.eon [contenteditable]{background:#fefce8;border:1px dashed #f59e0b;border-radius:.2rem;outline:none;padding:.1em .25em;min-width:2em;cursor:text;display:inline-block}
+body.eon [contenteditable]:focus{border-color:#d97706;background:#fef9c3}
+.fi{opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .55s ease}
+.fi.vis{opacity:1;transform:translateY(0)}
+@media(max-width:767px){.nav-links{display:none}#hero.wrap{padding-top:6rem;padding-bottom:3rem}.wrap{padding:3rem 1rem}}
+</style>
+</head>
+<body>
+
+<div id="edit-banner">
+  <span>✏️ Mode Édition — Cliquez sur n'importe quel texte pour le modifier</span>
+  <button onclick="exitEdit()">✓ Terminer</button>
+</div>
+
+<nav id="navbar">
+  <div class="nav-inner">
+    <div class="nav-brand">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+      H. MOUSSA
+    </div>
+    <div class="nav-links">
+      <a href="#profil">Profil</a>
+      <a href="#formation">Formation</a>
+      <a href="#experience">Expérience</a>
+      <a href="#projets">Projets</a>
+      <a href="#competences">Compétences</a>
+    </div>
+    <button class="btn-cv" onclick="openCV()">CV <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div id="hero" class="wrap">
+  <div class="hero-inner">
+    <div class="hero-text fi">
+      <div class="badge">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        <span contenteditable="false" data-key="badge">Recherche d'alternance · Sept. 2026</span>
+      </div>
+      <h1 class="hname"><span contenteditable="false" data-key="name">HAMZA MOUSSA</span></h1>
+      <p class="hsub">
+        <span contenteditable="false" data-key="title">Assistant Chargé d'Affaires</span><br>
+        <strong><span contenteditable="false" data-key="subtitle">Électricité &amp; Énergie</span></strong>
+      </p>
+      <div class="hmeta">
+        <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><span contenteditable="false" data-key="duration">12 mois · BUT GEII – EME</span></span>
+        <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span contenteditable="false" data-key="location">Nice (06)</span></span>
+      </div>
+      <div class="hbtns">
+        <button class="btn-p" onclick="openCV()">Voir mon CV moderne <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></button>
+        <button class="btn-s" onclick="document.getElementById('infos').scrollIntoView({behavior:'smooth'})">Me contacter</button>
+      </div>
+    </div>
+    <div class="photo-w fi">
+      <div class="glow"></div>
+      <img src="data:image/jpeg;base64,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" alt="Hamza Moussa" id="profile-photo">
+    </div>
+  </div>
+</div>
+
+<!-- PROFIL -->
+<section class="sec-alt"><div id="profil" class="wrap" style="padding-top:5rem;padding-bottom:5rem">
+  <div class="sec-hd fi"><div class="sec-ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div><h2 class="sec-t">À propos</h2></div>
+  <p class="pro-p fi" contenteditable="false" data-key="bio">Étudiant en BUT GEII – Électricité &amp; Maîtrise de l'Énergie à l'IUT Nice Côte d'Azur (promo 2027), passionné par les systèmes électriques industriels et la transition énergétique. Fort d'un stage en bureau d'études chez ONE-TOO, je recherche une alternance de 12 mois à partir de septembre 2026 pour contribuer à des projets concrets en électricité ou énergie.</p>
+</div></section>
+
+<!-- FORMATION -->
+<section><div id="formation" class="wrap">
+  <div class="sec-hd fi"><div class="sec-ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div><h2 class="sec-t">Formation</h2></div>
+  <div class="tl">
+    <div class="tl-i fi"><div class="tl-d"></div>
+      <div class="tl-dt">2024 – 2027</div>
+      <h3 class="tl-ti">BUT GEII – Parcours Électricité et Maîtrise de l'Énergie (EME)</h3>
+      <p class="tl-sb">IUT Nice Côte d'Azur, Nice (06)</p>
+      <div class="g2">
+        <div class="tag"><span class="tag-ic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>Systèmes électriques, distribution BT/HTA, protection des installations</div>
+        <div class="tag"><span class="tag-ic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span>Instrumentation, capteurs, automatisme industriel, métrologie</div>
+        <div class="tag"><span class="tag-ic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></span>Électronique analogique &amp; numérique, microcontrôleurs, Arduino</div>
+        <div class="tag"><span class="tag-ic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span>Analyse de besoins, cahier des charges, gestion de projet, Gantt</div>
+        <div class="tag"><span class="tag-ic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg></span>Modélisation SysML, schémas électriques, simulation de réseaux</div>
+        <div class="tag"><span class="tag-ic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></span>Communication technique, relation client, rapports d'études</div>
+      </div>
+    </div>
+    <div class="tl-i fi"><div class="tl-d dm"></div>
+      <div class="tl-dt dm">2021 – 2024</div>
+      <h3 class="tl-ti">Baccalauréat Technologique STI2D — Spécialité Énergie &amp; Environnement (EE)</h3>
+      <p class="tl-sb">Lycée Les Eucalyptus · Bases solides pour le cycle GEII</p>
+      <div class="g2">
+        <div class="tag">Production, transport et gestion de l'énergie électrique</div>
+        <div class="tag">Sciences de l'ingénieur : mécanique, électricité, modélisation</div>
+        <div class="tag">Circuits électroniques, lois de Kirchhoff, composants actifs/passifs</div>
+        <div class="tag">Programmation embarquée, capteurs, systèmes automatisés</div>
+        <div class="tag">Conception CAO, maquettes numériques, physique appliquée</div>
+        <div class="tag">Projets pluridisciplinaires, développement durable, éco-conception</div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- EXPERIENCE -->
+<section class="sec-dark"><div id="experience" class="wrap">
+  <div class="sec-hd fi"><div class="sec-ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div><h2 class="sec-t">Expérience Professionnelle</h2></div>
+  <div class="exp-c fi">
+    <div class="exp-hd">
+      <div>
+        <div class="exp-r"><span contenteditable="false" data-key="expRole">Stage – Bureau d'Études Électriques &amp; Mécaniques</span></div>
+        <div class="exp-co"><span contenteditable="false" data-key="expCompany">ONE-TOO · Carros (06) · Automatisme &amp; Métrologie industrielle</span></div>
+      </div>
+      <div class="exp-b"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><span contenteditable="false" data-key="expDate">Mars – Avr. 2026 · 2 mois</span></div>
+    </div>
+    <ul class="exp-l">
+      <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg><span contenteditable="false" data-key="exp0">Analyse fonctionnelle d'un système industriel et rédaction complète du cahier des charges</span></li>
+      <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg><span contenteditable="false" data-key="exp1">Étude technique d'un banc de calibration automatisé : architecture électrique, sécurité, planning Gantt</span></li>
+      <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg><span contenteditable="false" data-key="exp2"><strong>Résultat clé :</strong> potentiel de gain ×3 en productivité identifié et chiffré dans le rapport</span></li>
+      <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg><span contenteditable="false" data-key="exp3">Spécification des capteurs industriels et lecture de schémas électriques 380V / 24V</span></li>
+    </ul>
+  </div>
+</div></section>
+
+<!-- PROJETS -->
+<section><div id="projets" class="wrap">
+  <div class="sec-hd fi"><div class="sec-ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div><h2 class="sec-t">Projets Étudiants</h2></div>
+  <div class="pg">
+    <div class="pc fi"><div class="pci"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+      <div class="pt"><span contenteditable="false" data-key="p0t">Robot Autonome</span></div>
+      <div class="ps"><span contenteditable="false" data-key="p0s">Système embarqué avec capteurs</span></div>
+      <ul class="pl"><li><span contenteditable="false" data-key="p0i0">Programmation Arduino, capteurs de détection d'obstacles</span></li><li><span contenteditable="false" data-key="p0i1">Montage électronique, mesures de tension et courant</span></li><li><span contenteditable="false" data-key="p0i2">Tests, débogage et optimisation du code embarqué</span></li></ul>
+    </div>
+    <div class="pc fi"><div class="pci"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+      <div class="pt"><span contenteditable="false" data-key="p1t">Flipper Électronique</span></div>
+      <div class="ps"><span contenteditable="false" data-key="p1s">Conception &amp; réalisation complète</span></div>
+      <ul class="pl"><li><span contenteditable="false" data-key="p1i0">Conception du circuit électronique complet</span></li><li><span contenteditable="false" data-key="p1i1">Programmation : boutons, affichage des scores, logique de commande</span></li><li><span contenteditable="false" data-key="p1i2">Tests, mesures et correction des dysfonctionnements</span></li></ul>
+    </div>
+    <div class="pc fi"><div class="pci"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+      <div class="pt"><span contenteditable="false" data-key="p2t">Montages Électroniques</span></div>
+      <div class="ps"><span contenteditable="false" data-key="p2s">Analogique &amp; Numérique</span></div>
+      <ul class="pl"><li><span contenteditable="false" data-key="p2i0">Circuits sur breadboard : amplificateurs, filtres, oscillateurs</span></li><li><span contenteditable="false" data-key="p2i1">Mesures à l'oscilloscope et au multimètre</span></li><li><span contenteditable="false" data-key="p2i2">Analyse de signaux, relevé de caractéristiques</span></li></ul>
+    </div>
+    <div class="pc fi"><div class="pci"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg></div>
+      <div class="pt"><span contenteditable="false" data-key="p3t">Étude Énergétique</span></div>
+      <div class="ps"><span contenteditable="false" data-key="p3s">BUT GEII – Projet EME</span></div>
+      <ul class="pl"><li><span contenteditable="false" data-key="p3i0">Dimensionnement d'une installation électrique résidentielle</span></li><li><span contenteditable="false" data-key="p3i1">Calcul de sections de câbles, protection différentielle</span></li><li><span contenteditable="false" data-key="p3i2">Rédaction du rapport technique et présentation orale</span></li></ul>
+    </div>
+  </div>
+</div></section>
+
+<!-- COMPETENCES -->
+<section style="background:#f8fafc"><div id="competences" class="wrap">
+  <div class="sec-hd fi"><div class="sec-ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg></div><h2 class="sec-t">Compétences</h2></div>
+  <p style="color:var(--muted);font-size:.875rem;margin-bottom:2.5rem" class="fi">Ce que je sais faire concrètement — pour les projets qui comptent.</p>
+  <div class="sg">
+    <div class="sc fi"><div class="sl cb"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg><span contenteditable="false" data-key="sk0cat">Électrotechnique</span></div><ul class="si"><li><span class="sd db"></span><span contenteditable="false" data-key="sk0i0">Schémas électriques BT/HTA</span></li><li><span class="sd db"></span><span contenteditable="false" data-key="sk0i1">Câblage &amp; protections</span></li><li><span class="sd db"></span><span contenteditable="false" data-key="sk0i2">Distribution d'énergie</span></li><li><span class="sd db"></span><span contenteditable="false" data-key="sk0i3">Sécurité des installations</span></li></ul></div>
+    <div class="sc fi"><div class="sl cg"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg><span contenteditable="false" data-key="sk1cat">Énergie &amp; IRVE</span></div><ul class="si"><li><span class="sd dg"></span><span contenteditable="false" data-key="sk1i0">Transition énergétique</span></li><li><span class="sd dg"></span><span contenteditable="false" data-key="sk1i1">Bornes de recharge VE (IRVE)</span></li><li><span class="sd dg"></span><span contenteditable="false" data-key="sk1i2">Autoconsommation solaire</span></li><li><span class="sd dg"></span><span contenteditable="false" data-key="sk1i3">Efficacité énergétique</span></li></ul></div>
+    <div class="sc fi"><div class="sl cp"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg><span contenteditable="false" data-key="sk2cat">Instrumentation &amp; Mesures</span></div><ul class="si"><li><span class="sd dp"></span><span contenteditable="false" data-key="sk2i0">Capteurs industriels</span></li><li><span class="sd dp"></span><span contenteditable="false" data-key="sk2i1">Oscilloscope &amp; multimètre</span></li><li><span class="sd dp"></span><span contenteditable="false" data-key="sk2i2">Bancs de calibration</span></li><li><span class="sd dp"></span><span contenteditable="false" data-key="sk2i3">Automatisme (Arduino)</span></li></ul></div>
+    <div class="sc fi"><div class="sl co"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg><span contenteditable="false" data-key="sk3cat">Bureau d'Études</span></div><ul class="si"><li><span class="sd do"></span><span contenteditable="false" data-key="sk3i0">Cahier des charges</span></li><li><span class="sd do"></span><span contenteditable="false" data-key="sk3i1">Analyse fonctionnelle</span></li><li><span class="sd do"></span><span contenteditable="false" data-key="sk3i2">Planning Gantt</span></li><li><span class="sd do"></span><span contenteditable="false" data-key="sk3i3">Étude de rentabilité</span></li></ul></div>
+    <div class="sc fi"><div class="sl cs"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg><span contenteditable="false" data-key="sk4cat">Outils &amp; Logiciels</span></div><ul class="si"><li><span class="sd ds"></span><span contenteditable="false" data-key="sk4i0">Suite Office (Excel, Word, PPT)</span></li><li><span class="sd ds"></span><span contenteditable="false" data-key="sk4i1">SolidWorks (initiation)</span></li><li><span class="sd ds"></span><span contenteditable="false" data-key="sk4i2">SysML / modélisation</span></li><li><span class="sd ds"></span><span contenteditable="false" data-key="sk4i3">CAO électrique (initiation)</span></li></ul></div>
+    <div class="sc fi"><div class="sl cr"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span contenteditable="false" data-key="sk5cat">Soft Skills</span></div><ul class="si"><li><span class="sd dr"></span><span contenteditable="false" data-key="sk5i0">Communication client</span></li><li><span class="sd dr"></span><span contenteditable="false" data-key="sk5i1">Gestion de projet</span></li><li><span class="sd dr"></span><span contenteditable="false" data-key="sk5i2">Rigueur &amp; autonomie</span></li><li><span class="sd dr"></span><span contenteditable="false" data-key="sk5i3">Travail en équipe</span></li></ul></div>
+  </div>
+</div></section>
+
+<!-- INFOS -->
+<section><div id="infos" class="wrap">
+  <div class="ig">
+    <div class="ib fi">
+      <h3>Contact</h3>
+      <ul class="cl">
+        <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.18 10a19.79 19.79 0 0 1-3.07-8.63A2 2 0 0 1 3.14 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.1a16 16 0 0 0 5.99 5.99l.38-.39a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 16z"/></svg><a href="tel:0629515023"><span contenteditable="false" data-key="phone">06 29 51 50 23</span></a></li>
+        <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><a href="mailto:hmoussa006@gmail.com"><span contenteditable="false" data-key="email">hmoussa006@gmail.com</span></a></li>
+        <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span contenteditable="false" data-key="city">Nice (06)</span></li>
+      </ul>
+    </div>
+    <div class="ib fi">
+      <h3>Langues &amp; Qualités</h3>
+      <div class="isub">Langues</div>
+      <ul class="il"><li><span contenteditable="false" data-key="lang0">🇫🇷 Français — Natif</span></li><li><span contenteditable="false" data-key="lang1">🇬🇧 Anglais — Courant</span></li><li><span contenteditable="false" data-key="lang2">🇸🇦 Arabe — Courant</span></li></ul>
+      <div class="isub">Qualités</div>
+      <ul class="il"><li><span contenteditable="false" data-key="qual0">⚡ Rigueur &amp; autonomie</span></li><li><span contenteditable="false" data-key="qual1">📋 Sens de l'organisation</span></li><li><span contenteditable="false" data-key="qual2">🤝 Esprit d'équipe</span></li><li><span contenteditable="false" data-key="qual3">🔧 Résolution de problèmes</span></li></ul>
+    </div>
+    <div class="ib fi">
+      <h3>Centres d'intérêt</h3>
+      <ul class="intl">
+        <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" style="flex-shrink:0;margin-top:2px"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg><span contenteditable="false" data-key="int0">Transition énergétique &amp; infrastructures électriques</span></li>
+        <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" style="flex-shrink:0;margin-top:2px"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg><span contenteditable="false" data-key="int1">Bornes IRVE &amp; mobilité électrique</span></li>
+        <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" style="flex-shrink:0;margin-top:2px"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg><span contenteditable="false" data-key="int2">Distribution électrique &amp; suivi de chantier</span></li>
+        <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" style="flex-shrink:0;margin-top:2px"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg><span contenteditable="false" data-key="int3">Sport — discipline, dépassement de soi</span></li>
+      </ul>
+    </div>
+  </div>
+</div></section>
+
+<footer><p>© <span id="yr"></span> Hamza Moussa — Tous droits réservés.</p></footer>
+
+<!-- FLOAT EDIT BTN -->
+<button id="float-edit" onclick="document.getElementById('pin-ov').classList.add('on')" title="Accès éditeur">
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+</button>
+
+<!-- PIN MODAL -->
+<div id="pin-ov" onclick="if(event.target===this)closePin()">
+  <div id="pin-modal">
+    <button id="pin-x" onclick="closePin()">✕</button>
+    <div class="mic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+    <h3>Accès Éditeur</h3>
+    <p>Entrez le code d'accès pour modifier le portfolio</p>
+    <input id="pin-inp" type="password" maxlength="4" placeholder="• • • •" onkeydown="if(event.key==='Enter')checkPin()">
+    <div id="pin-er"></div>
+    <button id="pin-ok" onclick="checkPin()">Valider</button>
+  </div>
+</div>
+
+<script>
+document.getElementById('yr').textContent=new Date().getFullYear();
+const secs=['profil','formation','experience','projets','competences','infos'];
+window.addEventListener('scroll',()=>{
+  let cur='';secs.forEach(id=>{const e=document.getElementById(id);if(e&&e.getBoundingClientRect().top<=120)cur=id;});
+  document.querySelectorAll('.nav-links a').forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+cur));
+  document.getElementById('navbar').style.top=document.getElementById('edit-banner').classList.contains('on')?'2.4rem':'0';
+},{passive:true});
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');obs.unobserve(e.target);}});},{threshold:.08,rootMargin:'-50px'});
+document.querySelectorAll('.fi').forEach(el=>obs.observe(el));
+const SK='hm_v3';
+try{const sv=JSON.parse(localStorage.getItem(SK)||'{}');Object.entries(sv).forEach(([k,v])=>{const el=document.querySelector('[data-key="'+k+'"]');if(el)el.innerHTML=v;});}catch(e){}
+function save(){const d={};document.querySelectorAll('[data-key]').forEach(el=>{d[el.dataset.key]=el.innerHTML;});try{localStorage.setItem(SK,JSON.stringify(d));}catch(e){}}
+const _kc=[0x31,0x35,0x30,0x38];
+function _va(s){return s.length===_kc.length&&[...s].every((c,i)=>c.charCodeAt(0)===_kc[i]);}
+function checkPin(){
+  const v=document.getElementById('pin-inp').value;
+  if(_va(v)){document.getElementById('pin-ov').classList.remove('on');document.getElementById('pin-inp').value='';document.getElementById('pin-er').textContent='';enterEdit();}
+  else{const i=document.getElementById('pin-inp');i.classList.add('err');i.value='';document.getElementById('pin-er').textContent='Code incorrect';setTimeout(()=>{i.classList.remove('err');document.getElementById('pin-er').textContent='';},2000);}
+}
+function closePin(){document.getElementById('pin-ov').classList.remove('on');document.getElementById('pin-inp').value='';document.getElementById('pin-er').textContent='';}
+function enterEdit(){
+  document.body.classList.add('eon');document.getElementById('edit-banner').classList.add('on');
+  document.getElementById('float-edit').style.display='none';document.getElementById('navbar').style.top='2.4rem';
+  document.querySelectorAll('[data-key]').forEach(el=>{el.contentEditable='true';el.addEventListener('input',save);});
+}
+function exitEdit(){
+  document.body.classList.remove('eon');document.getElementById('edit-banner').classList.remove('on');
+  document.getElementById('float-edit').style.display='';document.getElementById('navbar').style.top='0';
+  document.querySelectorAll('[data-key]').forEach(el=>{el.contentEditable='false';});save();
+}
+function gv(k){const e=document.querySelector('[data-key="'+k+'"]');return e?e.textContent.trim():'';}
+function gh(k){const e=document.querySelector('[data-key="'+k+'"]');return e?e.innerHTML:'';}
+function openCV(){
+  const nm=gv('name'),ph=document.getElementById('profile-photo').src;
+  const doc=`<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>CV – ${nm}</title><style>@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Inter',sans-serif;background:#f1f5f9;font-size:13px}.page{width:210mm;min-height:297mm;margin:0 auto;background:#fff;display:flex;box-shadow:0 4px 24px rgba(0,0,0,.12)}.sb{width:72mm;background:linear-gradient(160deg,#0369a1,#0ea5e9);color:#fff;padding:28px 20px;display:flex;flex-direction:column;gap:16px}.mn{flex:1;padding:28px 24px;display:flex;flex-direction:column;gap:14px;overflow:hidden}.pw{text-align:center}.pw img{width:86px;height:86px;border-radius:50%;border:3px solid rgba(255,255,255,.4);object-fit:cover}.sn{font-size:17px;font-weight:800;text-align:center;letter-spacing:-.5px;line-height:1.2}.st{font-size:9px;text-align:center;opacity:.75;text-transform:uppercase;letter-spacing:.5px;margin-top:2px}.ss{font-size:11px;text-align:center;font-weight:600;background:rgba(255,255,255,.15);border-radius:6px;padding:3px 8px;margin-top:3px}.sh{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;opacity:.6;margin-bottom:6px;padding-bottom:3px;border-bottom:1px solid rgba(255,255,255,.2)}.sr{display:flex;align-items:flex-start;gap:6px;font-size:10px;margin-bottom:4px;opacity:.88;word-break:break-all}.sk{background:rgba(255,255,255,.12);border-radius:4px;padding:2px 7px;font-size:10px;margin-bottom:3px;font-weight:500}.mh{font-size:15px;font-weight:800;color:#0369a1;border-bottom:2px solid #e0f2fe;padding-bottom:5px;margin-bottom:9px;letter-spacing:-.3px}.ms{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#0369a1;margin-bottom:6px}.tli{padding-left:12px;border-left:2px solid #bae6fd;margin-bottom:10px;position:relative}.tld{position:absolute;left:-5px;top:3px;width:8px;height:8px;border-radius:50%;background:#0ea5e9;border:2px solid #fff}.tld2{background:#94a3b8}.td{font-size:9px;color:#0ea5e9;font-weight:700;margin-bottom:1px}.td2{color:#94a3b8}.tt{font-size:11.5px;font-weight:700;margin-bottom:1px}.ts{font-size:9.5px;color:#64748b;margin-bottom:4px}.tb{display:flex;align-items:flex-start;gap:4px;font-size:9.5px;color:#475569;margin-bottom:2px}.tb::before{content:"›";color:#0ea5e9;font-weight:700;flex-shrink:0}.pgr{display:grid;grid-template-columns:1fr 1fr;gap:6px}.pc{background:#f8fafc;border-radius:5px;padding:6px;border:1px solid #e2e8f0}.pt{font-size:10.5px;font-weight:700;margin-bottom:1px}.ps{font-size:9px;color:#0ea5e9;font-weight:600;margin-bottom:3px}.pl{font-size:9px;color:#64748b;margin-bottom:2px;padding-left:7px;position:relative}.pl::before{content:"·";position:absolute;left:0;color:#0ea5e9}.chip{display:inline-block;background:#e0f2fe;color:#0369a1;border-radius:20px;padding:2px 7px;font-size:9px;font-weight:600;margin:1px}.ql{font-size:9.5px;margin-bottom:2px}.ll{font-size:10px;margin-bottom:2px}.pbtn{position:fixed;top:14px;right:14px;background:#0369a1;color:#fff;border:none;border-radius:7px;padding:8px 14px;cursor:pointer;font-weight:600;font-size:11px;box-shadow:0 2px 8px rgba(3,105,161,.4);z-index:99}@media print{.pbtn{display:none}body{background:#fff}.page{box-shadow:none;margin:0}}</style></head><body><button class="pbtn" onclick="window.print()">🖨 Imprimer / PDF</button><div class="page"><div class="sb"><div class="pw"><img src="${ph}" alt="${nm}"></div><div class="sn">${nm}</div><div class="st">${gv('title')}</div><div class="ss">${gv('subtitle')}</div><div><div class="sh">Contact</div><div class="sr">📞 ${gv('phone')}</div><div class="sr">✉️ ${gv('email')}</div><div class="sr">📍 ${gv('city')}</div></div><div><div class="sh">Alternance</div><div class="sr">📅 ${gv('duration')}</div></div><div><div class="sh">Compétences</div>${[0,1,2,3,4,5].map(i=>'<div class="sk">'+gv('sk'+i+'cat')+'</div>').join('')}</div><div><div class="sh">Langues</div>${[0,1,2].map(i=>'<div class="ll">'+gv('lang'+i)+'</div>').join('')}</div><div><div class="sh">Qualités</div>${[0,1,2,3].map(i=>'<div class="ql">'+gv('qual'+i)+'</div>').join('')}</div></div><div class="mn"><div class="mh">${nm}</div><div><div class="ms">Profil</div><p style="font-size:10.5px;color:#475569;line-height:1.6">${gv('bio')}</p></div><div><div class="ms">Formation</div><div class="tli"><div class="tld"></div><div class="td">2024 – 2027</div><div class="tt">BUT GEII – Parcours Électricité et Maîtrise de l'Énergie (EME)</div><div class="ts">IUT Nice Côte d'Azur, Nice (06)</div><div class="tb">Systèmes électriques, distribution BT/HTA, protection</div><div class="tb">Instrumentation, capteurs, automatisme industriel</div><div class="tb">Électronique analogique & numérique, microcontrôleurs</div><div class="tb">Modélisation SysML, schémas, gestion de projet</div></div><div class="tli"><div class="tld tld2"></div><div class="td td2">2021 – 2024</div><div class="tt">Bac STI2D — Énergie & Environnement (EE)</div><div class="ts">Lycée Les Eucalyptus</div><div class="tb">Production, transport et gestion de l'énergie</div><div class="tb">Sciences de l'ingénieur, programmation embarquée, CAO</div></div></div><div><div class="ms">Expérience Professionnelle</div><div class="tli"><div class="tld"></div><div class="td">${gv('expDate')}</div><div class="tt">${gv('expRole')}</div><div class="ts">${gv('expCompany')}</div>${[0,1,2,3].map(i=>'<div class="tb">'+gv('exp'+i)+'</div>').join('')}</div></div><div><div class="ms">Projets Étudiants</div><div class="pgr">${[0,1,2,3].map(i=>'<div class="pc"><div class="pt">'+gv('p'+i+'t')+'</div><div class="ps">'+gv('p'+i+'s')+'</div>'+[0,1,2].map(j=>'<div class="pl">'+gv('p'+i+'i'+j)+'</div>').join('')+'</div>').join('')}</div></div><div><div class="ms">Centres d\'intérêt</div>${[0,1,2,3].map(i=>'<span class="chip">'+gv('int'+i)+'</span>').join('')}</div></div></div></body></html>`;
+  const b=new Blob([doc],{type:'text/html;charset=utf-8'});const u=URL.createObjectURL(b);const w=window.open(u,'_blank');if(w)setTimeout(()=>URL.revokeObjectURL(u),60000);
+}
+</script>
+</body>
+</html>
